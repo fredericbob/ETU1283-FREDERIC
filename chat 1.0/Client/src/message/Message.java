@@ -11,13 +11,11 @@ public class Message extends Thread{
     private boolean loop = true;
     private ObjectInputStream in;
     private final JTextArea allMessage;
-    private Socket socket;
 
 
     public Message(JTextArea allMessage, Socket socket) throws IOException {
         in = new ObjectInputStream(socket.getInputStream());
         this.allMessage = allMessage;
-        this.socket = socket;
 
         start();
     }

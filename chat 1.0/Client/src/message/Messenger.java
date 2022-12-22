@@ -9,30 +9,45 @@ import java.net.Socket;
 
 public class Messenger extends JFrame {
     JButton send;
+    JButton sendFile;
     JScrollPane jScrollPane;
     JTextArea allMessage;
     JTextField inputMessage;
+    JTextField inputFile;
 
-    public Messenger(Socket socket) throws IOException {
+    public Messenger(Socket socket, Socket socketFile) throws IOException {
         inputMessage = new JTextField();
         send = new JButton("Send");
+        inputFile = new JTextField();
+        sendFile = new JButton("Send File");
         jScrollPane = new JScrollPane();
         allMessage = new JTextArea();
 
         initFrame();
-        send.addActionListener(new Listener(inputMessage, socket));
+        Listener listener = new Listener(inputMessage, inputFile, socket, socketFile);
+        send.setActionCommand("message");
+        send.addActionListener(listener);
+        sendFile.setActionCommand("file");
+        sendFile.addActionListener(listener);
 
         inputMessage.setBounds(20,50,300,40);
         add(inputMessage);
 
-        send.setBounds(inputMessage.getWidth()+50, 50, 100,40);
+        send.setBounds(inputMessage.getWidth()+50, 53, 100,30);
         send.setFocusable(false);
         add(send);
+
+        inputFile.setBounds(20, 95,300,25);
+        add(inputFile);
+
+        sendFile.setBounds(inputFile.getWidth()+50, 95,100, 25);
+        sendFile.setFocusable(false);
+        add(sendFile);
 
         allMessage.setEditable(false);
         jScrollPane.setViewportView(allMessage);
         jScrollPane.setPreferredSize(new Dimension(300,320));
-        jScrollPane.setBounds(20,120, (int) jScrollPane.getPreferredSize().getWidth(), (int) jScrollPane.getPreferredSize().getHeight());
+        jScrollPane.setBounds(20,145, (int) jScrollPane.getPreferredSize().getWidth(), (int) jScrollPane.getPreferredSize().getHeight());
         add(jScrollPane);
 
         setVisible(true);
@@ -42,7 +57,7 @@ public class Messenger extends JFrame {
     private void initFrame() {
         setTitle("Chat 1.0");
         setLayout(null);
-        setSize(500,500);
+        setSize(500,520);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);

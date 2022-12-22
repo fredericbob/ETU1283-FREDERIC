@@ -10,6 +10,8 @@ public class Client {
     private String room;
     private DataInputStream in;
     private ObjectOutputStream os;
+    private DataOutputStream osFile;
+    private DataInputStream inFile;
 
     public String getNom() {
         return nom;
@@ -35,11 +37,28 @@ public class Client {
         this.in = in;
     }
 
+
     public ObjectOutputStream getOs() {
         return os;
     }
 
     public void setOs(ObjectOutputStream os) {
         this.os = os;
+    }
+
+    public DataOutputStream getOsFile() {
+        return osFile;
+    }
+
+    public void setOsFile(DataOutputStream osFile) {
+        this.osFile = osFile;
+    }
+
+    public DataInputStream getInFile() {
+        return inFile;
+    }
+
+    public void setInFile(DataInputStream inFile) {
+        this.inFile = inFile;
     }
 }

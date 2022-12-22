@@ -12,7 +12,6 @@ public class listenFile extends Thread{
     String[][] data;
 
     public listenFile(String filename) {
-        nbline = 0;
         file = Main.dossier+filename.toUpperCase()+".txt";
 
         start();
@@ -32,13 +31,12 @@ public class listenFile extends Thread{
                 int nbTemp = Input.countLine(file);
                 if(nbline < nbTemp) {
                     for (Client c : Main.clients) {
-                        if(file.contains(c.getRoom().toUpperCase())) {
+                        if(file.contains(c.getRoom())) {
                             sendMessage(c);
                         }
                     }
                     nbline = nbTemp;
                 }
-
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
